@@ -1,0 +1,263 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #faf8f3;
+  --color-paper-dim: #f2efe8;
+  --color-ink: #0b0b0c;
+  --color-ink-soft: #26262a;
+  --color-line: #dcd8cf;
+  --color-blue: #2b4fe0;
+  --color-blue-soft: #eef1fd;
+
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+/* Focus visibility */
+:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Thin scrollbar, techy feel */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-paper);
+}
+::-webkit-scrollbar-thumb {
+  background: #d7d2c6;
+  border-radius: 8px;
+  border: 2px solid var(--color-paper);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink);
+}
+
+/* ---------------- Keycap system ---------------- */
+.keycap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+  border-radius: 9px;
+  border: 1.5px solid rgba(11, 11, 12, 0.85);
+  background: #fffdf9;
+  color: var(--color-ink);
+  box-shadow:
+    0 3px 0 0 rgba(11, 11, 12, 0.92),
+    0 6px 10px rgba(11, 11, 12, 0.08);
+  transform: translateY(0);
+  transition:
+    transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 150ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 150ms ease,
+    background-color 150ms ease;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.keycap:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-blue);
+  box-shadow:
+    0 5px 0 0 rgba(11, 11, 12, 0.92),
+    0 10px 16px rgba(11, 11, 12, 0.12);
+}
+
+.keycap:active {
+  transform: translateY(1.5px);
+  box-shadow:
+    0 1.5px 0 0 rgba(11, 11, 12, 0.92),
+    0 2px 4px rgba(11, 11, 12, 0.1);
+}
+
+.keycap-dark {
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  background: #101012;
+  color: #f6f4ee;
+  box-shadow:
+    0 3px 0 0 rgba(255, 255, 255, 0.2),
+    0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
+.keycap-dark:hover {
+  border-color: var(--color-blue);
+  box-shadow:
+    0 5px 0 0 rgba(255, 255, 255, 0.28),
+    0 12px 20px rgba(0, 0, 0, 0.4);
+}
+
+.keycap-dark:active {
+  box-shadow:
+    0 1.5px 0 0 rgba(255, 255, 255, 0.28),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .keycap,
+  .keycap-dark {
+    transition: border-color 150ms ease, background-color 150ms ease;
+  }
+  .keycap:hover,
+  .keycap-dark:hover {
+    transform: none;
+  }
+  .keycap:active,
+  .keycap-dark:active {
+    transform: none;
+  }
+}
+
+/* Reveal utility (JS toggles data-inview) */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 650ms cubic-bezier(0.2, 0.7, 0.2, 1), transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity, transform;
+}
+[data-reveal="in"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.grain-line {
+  background-image: linear-gradient(to right, var(--color-line) 1px, transparent 1px);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes ph-spin {
+  from {
+    transform: rotateY(0deg) rotateX(4deg);
+  }
+  to {
+    transform: rotateY(360deg) rotateX(4deg);
+  }
+}
+
+@keyframes ph-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.animate-ph-pulse {
+  animation: ph-pulse 1.6s ease-in-out infinite;
+}
+
+
+/* Embedded service demos -------------------------------------------------- */
+.northline-demo {
+  --color-ink: #0f1112;
+  --color-ink-soft: #1a1c1e;
+  --color-paper: #f6f3ee;
+  --color-paper-warm: #efeae0;
+  --color-stone: #8a8580;
+  --color-line: #d9d4c8;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.northline-demo .font-display {
+  font-family: Fraunces, Georgia, serif;
+  letter-spacing: -0.02em;
+}
+.northline-demo .eyebrow {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-stone);
+}
+.northline-demo .hairline { height: 1px; background-color: var(--color-line); }
+.northline-demo .thin-rule {
+  background-image: linear-gradient(to right, var(--color-line) 50%, transparent 50%);
+  background-size: 6px 1px;
+  background-repeat: repeat-x;
+  height: 1px;
+  width: 100%;
+}
+
+.northline-ops-demo {
+  --bg: #f6f5f1;
+  --ink: #0a0a0a;
+  --paper: #ffffff;
+  --line: #e6e3dc;
+  --muted: #6b6b66;
+  --accent: #ff5b1f;
+  --accent-soft: #ffe6d9;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+.northline-ops-demo .font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+.northline-ops-demo .font-display {
+  font-family: "Times New Roman", ui-serif, Georgia, serif;
+  letter-spacing: -0.02em;
+}
+.northline-lead-demo {
+  background: #f6f5f1;
+  color: #0a0a0a;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+.northline-lead-demo .font-display {
+  font-family: "Times New Roman", ui-serif, Georgia, serif;
+  letter-spacing: -0.02em;
+}
