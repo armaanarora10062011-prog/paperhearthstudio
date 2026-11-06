@@ -1,0 +1,428 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Paperhearth Studio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Figtree:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout concept: one phone-width column; hero with a live sample phone, three niche rows, two price cards, a WhatsApp message builder. Desktop widens to two columns. */
+:root{
+  --paper:#F4F5F1; --ink:#13191A; --mute:#566160; --line:#D8DCD4; --surface:#FFFFFF;
+  --accent:#0B5D49; --on-accent:#F4F5F1; --glow:#D3E8DE;
+  --f-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --f-body:'Figtree','Segoe UI',system-ui,sans-serif;
+  --f-mono:'DM Mono',ui-monospace,Menlo,monospace;
+  /* sample client sites inside the phone keep their own colours in both themes */
+  --g-bg:#16181B; --g-fg:#F1F1EE; --g-ac:#F2B53B;
+  --t-bg:#0F3D2E; --t-fg:#EAF3EC; --t-ac:#C6EE6B;
+  --i-bg:#EDE6DC; --i-fg:#2B2622; --i-ac:#8A5A3C;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1312; --ink:#EAEFEA; --mute:#9AA6A3; --line:#26302E; --surface:#151C1B;
+    --accent:#59D1A6; --on-accent:#0E1312; --glow:#173A31; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1312; --ink:#EAEFEA; --mute:#9AA6A3; --line:#26302E; --surface:#151C1B;
+  --accent:#59D1A6; --on-accent:#0E1312; --glow:#173A31; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper); color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.55;
+  -webkit-text-size-adjust:100%;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--paper);z-index:30}
+h1,h2,h3,p,ul,dl,dd{margin:0}
+ul{padding:0;list-style:none}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{
+  width:100%;max-width:1080px;margin-inline:auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+.mono{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
+.brand{font-family:var(--f-display);font-weight:700;font-size:20px;letter-spacing:-.01em;text-decoration:none;display:flex;align-items:center;gap:8px}
+.brand i{width:14px;height:14px;border-radius:50% 50% 50% 4px;background:var(--accent);display:block}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:12px 20px;
+  border-radius:999px;border:1.5px solid transparent;font:600 16px/1 var(--f-body);text-decoration:none;cursor:pointer;
+  transition:transform .15s ease,background-color .15s ease;
+}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--accent);color:var(--on-accent)}
+.btn-primary:hover{filter:brightness(1.08)}
+.btn-ghost{border-color:var(--line);color:var(--ink);background:transparent}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn-sm{min-height:40px;padding:9px 16px;font-size:14px}
+.btn svg{width:20px;height:20px;flex:none}
+
+/* hero */
+.hero{display:grid;gap:36px;padding-block:36px 56px}
+.hero-copy{display:grid;gap:20px;align-content:start;min-width:0}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(2.1rem,9vw,3.6rem);line-height:1.02;letter-spacing:-.025em;text-wrap:balance}
+h1 em{font-style:normal;color:var(--accent)}
+.lede{color:var(--mute);font-size:18px;max-width:52ch}
+.cta-row{display:grid;gap:10px}
+.number{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--mute);font-size:14px}
+.number b{font-family:var(--f-mono);font-weight:500;color:var(--ink);font-size:15px;user-select:all}
+.copy{font:500 13px var(--f-body);border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
+.copy:hover{border-color:var(--ink)}
+
+/* phone */
+.stage{display:grid;justify-items:center;gap:14px;min-width:0}
+.tabs{display:flex;gap:6px;background:var(--glow);padding:4px;border-radius:999px}
+.tab{border:0;background:transparent;color:var(--ink);font:500 14px var(--f-body);padding:8px 16px;border-radius:999px;cursor:pointer;min-height:36px}
+.tab[aria-selected="true"]{background:var(--paper);box-shadow:0 1px 0 var(--line)}
+.phone{
+  width:min(100%,272px);aspect-ratio:9/18.2;border-radius:38px;padding:9px;background:var(--ink);position:relative;
+  box-shadow:0 30px 60px -30px color-mix(in srgb,var(--ink) 45%,transparent);
+}
+.phone::after{content:"";position:absolute;top:15px;left:50%;width:70px;height:18px;margin-left:-35px;border-radius:12px;background:var(--ink);z-index:3}
+.screen{position:relative;width:100%;height:100%;border-radius:30px;overflow:hidden}
+.site{position:absolute;inset:0;padding:40px 16px 16px;display:flex;flex-direction:column;gap:12px;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s}
+.site.on{opacity:1;visibility:visible}
+.site .nav{display:flex;justify-content:space-between;align-items:center;font:700 12px var(--f-display);letter-spacing:.08em}
+.site .burger{width:16px;height:10px;border-top:2px solid currentColor;border-bottom:2px solid currentColor;position:relative}
+.site .burger::after{content:"";position:absolute;left:0;right:0;top:2px;border-top:2px solid currentColor}
+.site h3{font:700 25px/1.05 var(--f-display);letter-spacing:-.02em}
+.site .mini-btn{align-self:flex-start;padding:9px 14px;border-radius:999px;font:600 12px var(--f-body)}
+.rows{display:grid;gap:6px;font:500 12px var(--f-body)}
+.rows div{display:flex;justify-content:space-between;padding:8px 10px;border-radius:10px}
+.s-gym{background:var(--g-bg);color:var(--g-fg)}
+.s-gym .mini-btn{background:var(--g-ac);color:var(--g-bg)}
+.s-gym .rows div{background:#23262B}
+.s-gym .rows span:last-child{color:var(--g-ac)}
+.s-turf{background:var(--t-bg);color:var(--t-fg)}
+.s-turf .mini-btn{background:var(--t-ac);color:var(--t-bg)}
+.slots{display:grid;grid-template-columns:1fr 1fr;gap:6px;font:500 12px var(--f-body)}
+.slots div{padding:9px 10px;border-radius:10px;background:#18503D;display:grid;gap:2px}
+.slots div b{font-family:var(--f-mono);font-weight:500;color:var(--t-ac)}
+.slots .full{opacity:.45}
+.slots .full b{color:var(--t-fg);text-decoration:line-through}
+.s-int{background:var(--i-bg);color:var(--i-fg)}
+.s-int .mini-btn{background:var(--i-fg);color:var(--i-bg)}
+.gal{display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:62px 62px;gap:6px}
+.gal div{border-radius:10px;display:flex;align-items:flex-end;padding:7px;font:600 11px var(--f-body);color:#fff}
+.gal .a{grid-row:span 2;background:linear-gradient(160deg,#B58A68,#6E4A33)}
+.gal .b{background:linear-gradient(160deg,#8E9A8B,#55645A)}
+.gal .c{background:linear-gradient(160deg,#C9B8A0,#8C7557)}
+.site .price{font:500 12px var(--f-mono);margin-top:auto;opacity:.85}
+.caption{font-size:13px;color:var(--mute);text-align:center}
+
+/* sections */
+section{padding-block:56px;border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:10px;margin-bottom:28px;max-width:60ch}
+h2{font-family:var(--f-display);font-weight:700;font-size:clamp(1.7rem,6.4vw,2.5rem);line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+.sec-head p{color:var(--mute)}
+
+.niche{display:grid;gap:14px;padding-block:24px;border-top:1px solid var(--line)}
+.niche:first-of-type{border-top:0;padding-top:0}
+.niche h3{font:700 26px/1.1 var(--f-display);letter-spacing:-.015em}
+.niche .tag{color:var(--mute);max-width:44ch}
+.niche ul{display:grid;gap:8px}
+.niche li{display:flex;gap:10px;align-items:baseline}
+.niche li::before{content:"";width:8px;height:2px;background:var(--accent);flex:none;transform:translateY(-4px)}
+
+/* pricing */
+.plans{display:grid;gap:16px}
+.plan{border:1px solid var(--line);border-radius:22px;padding:24px;display:grid;gap:20px;background:var(--surface);align-content:start;min-width:0}
+.plan.hot{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.plan .mono{color:inherit;opacity:.75}
+.plan h3{font:700 24px var(--f-display)}
+.amt{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.amt strong{font:700 clamp(2.6rem,11vw,3.4rem)/1 var(--f-display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.amt span{font-size:14px;opacity:.75}
+.inc{display:grid;gap:14px;margin:0}
+.inc div{display:grid;gap:3px;padding-top:14px;border-top:1px solid color-mix(in srgb,currentColor 18%,transparent)}
+.inc dt{font:400 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;opacity:.65}
+.inc dd{font-size:15px}
+.plan .btn-primary{background:var(--accent);color:var(--on-accent)}
+.plan.hot .btn{background:var(--on-accent);color:var(--accent)}
+.fine{margin-top:18px;color:var(--mute);font-size:14px}
+
+/* contact */
+.builder{display:grid;gap:22px;max-width:560px}
+fieldset{border:0;margin:0;padding:0;display:grid;gap:10px;min-width:0}
+legend{padding:0;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips label{padding:10px 16px;border:1.5px solid var(--line);border-radius:999px;cursor:pointer;font-weight:500;min-height:44px;display:inline-flex;align-items:center}
+.chips input:checked + label{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chips input:focus-visible + label{outline:2px solid var(--accent);outline-offset:3px}
+.preview{border-left:2px solid var(--accent);padding:4px 0 4px 14px;color:var(--mute);font-size:15px}
+
+footer{border-top:1px solid var(--line);padding-block:28px 40px;color:var(--mute);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* sticky mobile CTA */
+.dock{
+  position:fixed;left:0;right:0;bottom:0;z-index:25;background:var(--paper);border-top:1px solid var(--line);
+  padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+  transition:transform .3s ease;
+}
+.dock.away{transform:translateY(110%)}
+.dock .btn{width:100%}
+body{padding-bottom:76px}
+
+@media (min-width:860px){
+  body{padding-bottom:0}
+  .dock{display:none}
+  .hero{grid-template-columns:1.1fr .9fr;align-items:center;gap:56px;padding-block:72px 88px}
+  .cta-row{grid-template-columns:auto auto;justify-content:start}
+  .plans{grid-template-columns:1fr 1fr;gap:20px}
+  .niche{grid-template-columns:.9fr 1.1fr;gap:40px;align-items:start}
+  .niche .head{display:grid;gap:10px}
+  section{padding-block:80px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .site,.dock,.btn{transition:none}
+}
+</style>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Paperhearth home"><i></i>Paperhearth</a>
+    <a class="btn btn-primary btn-sm" href="https://wa.me/918827451523?text=Hi%20Paperhearth%2C%20I%27d%20like%20a%20website." target="_blank" rel="noopener">WhatsApp us</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div class="hero-copy">
+      <p class="mono">Web design studio · India</p>
+      <h1>Websites that turn Google searches into <em>WhatsApp enquiries.</em></h1>
+      <p class="lede">Paperhearth designs fast, mobile-first websites for gyms, turfs and interior designers. Priced in rupees, live in days.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://wa.me/918827451523?text=Hi%20Paperhearth%2C%20I%27d%20like%20a%20website." target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.4-4.2A8 8 0 1 1 8.3 18.7L4 20z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1.2-1.4-2-1-.8.7a3.6 3.6 0 0 1-1.7-1.7l.7-.8-1-2L9 9.5z" fill="currentColor" stroke="none"/></svg>
+          Chat on WhatsApp
+        </a>
+        <a class="btn btn-ghost" href="#pricing">See pricing</a>
+      </div>
+      <p class="number">WhatsApp <b id="num">+91 88274 51523</b> <button class="copy" id="copyBtn" type="button">Copy</button></p>
+    </div>
+
+    <div class="stage">
+      <div class="tabs" role="tablist" aria-label="Sample websites">
+        <button class="tab" role="tab" id="tab-gym" aria-selected="true" aria-controls="s-gym" type="button">Gym</button>
+        <button class="tab" role="tab" id="tab-turf" aria-selected="false" aria-controls="s-turf" type="button">Turf</button>
+        <button class="tab" role="tab" id="tab-int" aria-selected="false" aria-controls="s-int" type="button">Interior</button>
+      </div>
+      <div class="phone" aria-label="Sample website on a phone">
+        <div class="screen">
+          <div class="site s-gym on" id="s-gym" role="tabpanel" aria-labelledby="tab-gym">
+            <div class="nav"><span>FORGE FITNESS</span><span class="burger"></span></div>
+            <h3>Train harder. Start this week.</h3>
+            <span class="mini-btn">Book a free trial</span>
+            <div class="rows">
+              <div><span>6:00 AM · Strength</span><span>Mon–Sat</span></div>
+              <div><span>7:30 AM · HIIT</span><span>Mon–Fri</span></div>
+              <div><span>6:00 PM · Yoga</span><span>Daily</span></div>
+            </div>
+            <p class="price">Monthly from ₹1,499</p>
+          </div>
+          <div class="site s-turf" id="s-turf" role="tabpanel" aria-labelledby="tab-turf">
+            <div class="nav"><span>KICK-OFF TURF</span><span class="burger"></span></div>
+            <h3>Book your hour on the pitch.</h3>
+            <span class="mini-btn">Book on WhatsApp</span>
+            <div class="slots">
+              <div>6 PM <b>₹1,200</b></div>
+              <div>7 PM <b>₹1,200</b></div>
+              <div class="full">8 PM <b>Booked</b></div>
+              <div>9 PM <b>₹1,500</b></div>
+            </div>
+            <p class="price">Cricket · Football · Floodlit</p>
+          </div>
+          <div class="site s-int" id="s-int" role="tabpanel" aria-labelledby="tab-int">
+            <div class="nav"><span>ARC &amp; OAK</span><span class="burger"></span></div>
+            <h3>Rooms that fit how you live.</h3>
+            <div class="gal"><div class="a">Living</div><div class="b">Kitchen</div><div class="c">Bedroom</div></div>
+            <span class="mini-btn">Book a site visit</span>
+            <p class="price">3BHK packages from ₹6.5L</p>
+          </div>
+        </div>
+      </div>
+      <p class="caption">Sample layouts. Not live client sites.</p>
+    </div>
+  </div>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="mono">What we build</p>
+        <h2>Three kinds of business. Each site does one job.</h2>
+      </div>
+      <div>
+        <article class="niche">
+          <div class="head"><h3>Gyms</h3><p class="tag">Plans, timings and a free trial, all above the fold.</p></div>
+          <ul>
+            <li>Class timetable people can read in five seconds</li>
+            <li>Membership plans shown in rupees</li>
+            <li>Trainer profiles with real photos</li>
+            <li>Free-trial button that opens WhatsApp</li>
+          </ul>
+        </article>
+        <article class="niche">
+          <div class="head"><h3>Turfs</h3><p class="tag">Hourly slots and rates, one tap to book.</p></div>
+          <ul>
+            <li>Slot grid with prices per hour</li>
+            <li>Cricket and football rates side by side</li>
+            <li>Ground photos, floodlights and parking details</li>
+            <li>Booking request straight to your WhatsApp</li>
+          </ul>
+        </article>
+        <article class="niche">
+          <div class="head"><h3>Interior designers</h3><p class="tag">Projects first, enquiries second.</p></div>
+          <ul>
+            <li>Gallery sorted by room: living, kitchen, bedroom</li>
+            <li>Before and after of finished homes</li>
+            <li>Package pricing such as 2BHK and 3BHK</li>
+            <li>Site-visit request with area and budget</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="mono">Pricing</p>
+        <h2>Two prices. Everything included.</h2>
+        <p>Starting prices in rupees. Final quote depends on how much content you send us.</p>
+      </div>
+      <div class="plans">
+        <article class="plan">
+          <div><p class="mono">For getting online</p><h3>Launch</h3></div>
+          <div class="amt"><strong>₹4,000</strong><span>starting price</span></div>
+          <dl class="inc">
+            <div><dt>Pages and design</dt><dd>1 page, up to 5 sections. Custom mobile-first design.</dd></div>
+            <div><dt>Niche features</dt><dd>1 feature of your choice: timetable, slot grid or gallery.</dd></div>
+            <div><dt>WhatsApp, maps, Google</dt><dd>WhatsApp button, map, Google Business Profile set up.</dd></div>
+            <div><dt>Domain, hosting, delivery</dt><dd>Domain and hosting for 1 year. Live in 5 days.</dd></div>
+          </dl>
+          <a class="btn btn-primary" href="https://wa.me/918827451523?text=Hi%20Paperhearth%2C%20I%27m%20interested%20in%20the%20Launch%20plan%20(%E2%82%B94%2C000)." target="_blank" rel="noopener">Start with Launch</a>
+        </article>
+        <article class="plan hot">
+          <div><p class="mono">Most complete</p><h3>Studio</h3></div>
+          <div class="amt"><strong>₹6,000</strong><span>starting price</span></div>
+          <dl class="inc">
+            <div><dt>Pages and design</dt><dd>Up to 5 pages. Custom mobile-first design, tuned to your brand.</dd></div>
+            <div><dt>Niche features</dt><dd>3 features, such as plans, trainers and a trial form.</dd></div>
+            <div><dt>WhatsApp, maps, Google</dt><dd>WhatsApp, enquiry form, map, Google Business Profile and basic local SEO.</dd></div>
+            <div><dt>Domain, hosting, delivery</dt><dd>Domain and hosting for 1 year. Live in 10 days.</dd></div>
+          </dl>
+          <a class="btn" href="https://wa.me/918827451523?text=Hi%20Paperhearth%2C%20I%27m%20interested%20in%20the%20Studio%20plan%20(%E2%82%B96%2C000)." target="_blank" rel="noopener">Start with Studio</a>
+        </article>
+      </div>
+      <p class="fine">Not sure which fits? Message us your business and we'll suggest one.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="mono">Contact</p>
+        <h2>Tell us what you run. We'll reply on WhatsApp.</h2>
+      </div>
+      <div class="builder">
+        <fieldset>
+          <legend class="mono">Your business</legend>
+          <div class="chips">
+            <input type="radio" name="niche" id="n-gym" value="gym" checked><label for="n-gym">Gym</label>
+            <input type="radio" name="niche" id="n-turf" value="turf"><label for="n-turf">Turf</label>
+            <input type="radio" name="niche" id="n-int" value="interior design business"><label for="n-int">Interior designer</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend class="mono">Plan</legend>
+          <div class="chips">
+            <input type="radio" name="plan" id="p-launch" value="Launch (₹4,000)"><label for="p-launch">Launch ₹4,000</label>
+            <input type="radio" name="plan" id="p-studio" value="Studio (₹6,000)"><label for="p-studio">Studio ₹6,000</label>
+            <input type="radio" name="plan" id="p-unsure" value="" checked><label for="p-unsure">Not sure yet</label>
+          </div>
+        </fieldset>
+        <p class="preview" id="preview"></p>
+        <a class="btn btn-primary" id="send" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.4-4.2A8 8 0 1 1 8.3 18.7L4 20z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1.2-1.4-2-1-.8.7a3.6 3.6 0 0 1-1.7-1.7l.7-.8-1-2L9 9.5z" fill="currentColor" stroke="none"/></svg>
+          Send on WhatsApp
+        </a>
+        <p class="number">Or message <b id="num2">+91 88274 51523</b></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Paperhearth Studio</span><span>Made in India</span></div>
+</footer>
+
+<div class="dock" id="dock">
+  <a class="btn btn-primary" href="https://wa.me/918827451523?text=Hi%20Paperhearth%2C%20I%27d%20like%20a%20website." target="_blank" rel="noopener">Chat on WhatsApp</a>
+</div>
+
+<script>
+(function(){
+  var NUM = '918827451523';
+
+  /* sample phone tabs */
+  var ids = ['gym','turf','int'];
+  var tabs = ids.map(function(k){return document.getElementById('tab-'+k)});
+  var sites = ids.map(function(k){return document.getElementById('s-'+k)});
+  var cur = 0, timer = null;
+  function show(i){
+    cur = i;
+    tabs.forEach(function(t,n){t.setAttribute('aria-selected', n===i ? 'true':'false')});
+    sites.forEach(function(s,n){s.classList.toggle('on', n===i)});
+  }
+  tabs.forEach(function(t,n){
+    t.addEventListener('click', function(){ stop(); show(n); });
+  });
+  function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce){ timer = setInterval(function(){ show((cur+1)%3); }, 4500); }
+
+  /* copy number */
+  var btn = document.getElementById('copyBtn');
+  btn.addEventListener('click', function(){
+    var text = '+91 88274 51523';
+    function fallback(){
+      var r = document.createRange(); r.selectNodeContents(document.getElementById('num'));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = 'Selected';
+    }
+    try{
+      navigator.clipboard.writeText(text).then(function(){ btn.textContent = 'Copied'; }, fallback);
+    }catch(e){ fallback(); }
+    setTimeout(function(){ btn.textContent = 'Copy'; }, 2000);
+  });
+
+  /* message builder */
+  var send = document.getElementById('send'), preview = document.getElementById('preview');
+  function val(name){ var el = document.querySelector('input[name="'+name+'"]:checked'); return el ? el.value : ''; }
+  function build(){
+    var niche = val('niche'), plan = val('plan');
+    var msg = 'Hi Paperhearth, I run a ' + niche + ' and I’d like a website.' + (plan ? ' I’m interested in the ' + plan + ' plan.' : ' Can you suggest a plan?');
+    preview.textContent = '“' + msg + '”';
+    send.href = 'https://wa.me/' + NUM + '?text=' + encodeURIComponent(msg);
+  }
+  document.querySelectorAll('.builder input').forEach(function(i){ i.addEventListener('change', build); });
+  build();
+
+  /* hide dock when contact is on screen */
+  var dock = document.getElementById('dock'), contact = document.getElementById('contact');
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(e){ dock.classList.toggle('away', e[0].isIntersecting); }, {threshold:.25}).observe(contact);
+  }
+})();
+</script>
+
+</body></html>
